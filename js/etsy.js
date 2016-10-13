@@ -45,9 +45,9 @@ console.log('The average price is ' + accounting.formatMoney(averagePrice))
 // title: "Hand Painted Colorful Feather Glass", ...
 // } ]
 
-var itemsInPriceRange = items.map(function(item){
+var itemsInPriceRange = items.map(function(item){  //filter
     if ((item.price < 18) && (item.price > 14)){
-        return `title: ${item.title}`
+        return `title: ${item.title}` //true/false
         // itemsInPriceRange.push(item.title)
     }
     else {
@@ -55,7 +55,7 @@ var itemsInPriceRange = items.map(function(item){
     }
 })
 
-console.log("Items that cost between $14.00 USD and $18.00 USD: " + itemsInPriceRange)
+console.log("Items that cost between $14.00 USD and $18.00 USD: ", itemsInPriceRange)
 
 // var itemsInPriceRange2 = [] // This is an array approach I'd like to persue
 //
@@ -105,7 +105,7 @@ console.log("Items that cost between $14.00 USD and $18.00 USD: " + itemsInPrice
 // britishPound = britishPoundSearch(items)
 // console.log(britishPound.title)
 
-items.forEach(function(item) {
+items.forEach(function(item) { //could filter
     if (item.currency_code === 'GBP') {
         console.log(item.title + ' costs ' + accounting.formatMoney(item.price))
     }
@@ -119,17 +119,17 @@ items.forEach(function(item) {
 // Magnetic Wall Mount Bottle Opener Barware Set - Stainless Steel or Black - Personalized if you like! is made of wood.
 // Engraved Pocket Knife, Personalized Groomsmen Gift, Ring Bearer Gift, Graduation Gift, 4 Knives is made of wood.
 
-items.forEach(function(item) { // This repeats SALE for each value.  Should only show once.  Revamp
-    if (woodSearch(item.materials)) {
-        console.log('SALE ' + item.title + ' is made of wood ')
-    }
-})
+// items.forEach(function(item) { // This repeats SALE for each value.  Should only show once.  Revamp
+//     if (woodSearch(item.materials)) {  //filter
+//         console.log('SALE ' + item.title + ' is made of wood ')
+//     }
+// })
 
 function woodSearch(item) {
-    return item.includes('wood')
+    return item.materials.includes('wood')
 }
-
-
+var woodItems = items.filter(woodSearch)
+console.log(woodItems)
 // Question 5
 // Show me how to find which items are made of eight or more materials. Please console.log the ones you find.
 // Qty of 2 Groomsmen Gift - Stainless Steel Personalized Bottle Opener - NO Capcatcher has 9 materials:
@@ -159,9 +159,43 @@ function woodSearch(item) {
 // the three broomsticks glass
 // personalized harry potter glass
 
-var materialList = items.forEach(function(item) {
-    if (item.materials.length >= 8) {
-        return item.materials
+// var materialList = []
+items.forEach(function(item) { // refactor this to list the items unless Collin says it's Cool
+    if (item.materials.length >= 8) {//filter rewrite
+        // return item.materials
+        console.log(item.title + ' has ' + item.materials.length + ' materials:')
+        console.log(item.materials)
+        // materialList.push(item.materials)
     }
 })
-console.log(materialList)
+
+// console.log(materialList)
+
+//Question 6
+// Show me how to calculate how many items were made by their sellers
+// 18 were made by their sellers
+
+var selfBuiltCount = 0 // reduce
+items.forEach(function(item){
+
+    if (item.who_made === 'i_did') {
+            selfBuiltCount++
+    }
+})
+console.log(selfBuiltCount + ' were made by their sellers')
+
+
+var iMadeThis = items.reduce(function(previous, current){
+    if (current.who_made === 'i_did') {
+        return previous + 1
+    }
+    else {
+        return previous
+    }
+}, 0)
+
+var iMadeThis = items.reduce(function(previous, current) {
+    return (current.who_made === 'i_did') ? previous + 1 : previous //ternary!  What?!
+}, 0)
+
+console.log(iMadeThis)

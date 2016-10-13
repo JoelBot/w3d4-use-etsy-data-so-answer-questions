@@ -1,0 +1,20 @@
+{
+  "name": "w3d4-use-etsy-data-so-answer-questions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoelBot/w3d4-use-etsy-data-so-answer-questions.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoelBot/w3d4-use-etsy-data-so-answer-questions/issues"
+  },
+  "homepage": "https://github.com/JoelBot/w3d4-use-etsy-data-so-answer-questions#readme",
+  "dependencies": {}
+}
