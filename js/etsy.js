@@ -170,6 +170,7 @@ function woodSearch(item) {
 var woodItems = items.filter(woodSearch)
 console.log("Question 4")
 console.log(woodItems)
+
 // Question 5
 // Show me how to find which items are made of eight or more materials. Please console.log the ones you find.
 // Qty of 2 Groomsmen Gift - Stainless Steel Personalized Bottle Opener - NO Capcatcher has 9 materials:
@@ -211,8 +212,9 @@ console.log(woodItems)
 var moreThan8 = items.filter(function(item) { // this looks better, filters for items with enough materials
     return item.materials.length >= 8
 })
+console.log("Question 5")
 moreThan8.forEach(function(item){ // forEach to draw them to console in sequence
-    console.log("Question 5")
+
     console.log(item.title, 'has', item.materials.length, 'materials:')
     console.log(item.materials)
 })
@@ -257,5 +259,5 @@ var iMade = items.reduce(function(previous, current){// tried it with reduce hax
         return previous
     }
 }, 0)
-console.log("Question 7")
+console.log("Question 6")
 console.log(iMade + ' were made by their sellers.')
