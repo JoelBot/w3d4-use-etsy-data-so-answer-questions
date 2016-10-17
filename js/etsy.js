@@ -143,7 +143,7 @@ console.log(flippingPricedItemRange) // I feel sooooo close, but get undefined i
 //         console.log(item.title + ' costs ' + accounting.formatMoney(item.price))
 //     }
 // })
-var itemForPounds = items.filter(function(item) { 
+var itemForPounds = items.filter(function(item) {
     return item.currency_code.includes('GBP')
 })
 console.log("Question 3")
@@ -212,7 +212,7 @@ var moreThan8 = items.filter(function(item) { // this looks better, filters for 
     return item.materials.length >= 8
 })
 moreThan8.forEach(function(item){ // forEach to draw them to console in sequence
-    console.log("Question 6")
+    console.log("Question 5")
     console.log(item.title, 'has', item.materials.length, 'materials:')
     console.log(item.materials)
 })
