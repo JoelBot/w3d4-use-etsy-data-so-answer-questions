@@ -20,6 +20,7 @@ items.forEach(function(item) {
     totalPrice += item.price
 })
 var averagePrice = totalPrice/items.length
+console.log("Question 1")
 console.log('The average price is ' + accounting.formatMoney(averagePrice))
 // var total = items[0].reduce(function(previous, current) { // This will be really handy with homework
 //     return {price: previous + current}
@@ -31,6 +32,11 @@ console.log('The average price is ' + accounting.formatMoney(averagePrice))
 // items.foreach(function (title, price, array){
 //     console.log(title, price)
 // })
+
+// function searchForThePrices(item) {
+//     return item >= 14 && item <= 18
+// }
+
 
 
 // })
@@ -45,17 +51,29 @@ console.log('The average price is ' + accounting.formatMoney(averagePrice))
 // title: "Hand Painted Colorful Feather Glass", ...
 // } ]
 
-var itemsInPriceRange = items.map(function(item){  //filter
-    if ((item.price < 18) && (item.price > 14)){
-        return `title: ${item.title}` //true/false
-        // itemsInPriceRange.push(item.title)
-    }
-    else {
-
-    }
-})
-
-console.log("Items that cost between $14.00 USD and $18.00 USD: ", itemsInPriceRange)
+// var itemsInPriceRange = items.map(function(item){  //filter redo this when possible.
+//     if ((item.price < 18) && (item.price > 14)){
+//         return `title: ${item.title}` //true/false
+//         // itemsInPriceRange.push(item.title)
+//     }
+//     else {
+//
+//     }
+// })
+//
+// console.log("Items that cost between $14.00 USD and $18.00 USD: ", itemsInPriceRange)
+// var itemsInPriceRange = items.filter(function(item){  //filter
+//     // if ((item.price < 18) && (item.price > 14)){
+//     return (item.includes(item.price < 18) && item.includes(item.price > 14))//true/false
+//     // itemsInPriceRange.push(item.title)
+//     // return item.includes((item.price < 18) && (item.price > 14))
+//     // }
+//     // else {
+//     //
+//     // }
+// })
+//
+// console.log(itemsInPriceRange)
 
 // var itemsInPriceRange2 = [] // This is an array approach I'd like to persue
 //
@@ -88,6 +106,21 @@ console.log("Items that cost between $14.00 USD and $18.00 USD: ", itemsInPriceR
 //     title: 'lord'
 // },'mean','girls']
 
+
+// var priceRangeFTW = items.filter(function(item) {
+//     return item >= 14 && item <= 18
+// })
+// console.log("Question 2")
+// console.log(priceRangeFTW.title)
+
+var flippingPricedItemRange = items.filter(function(item) {
+    function rangeValidation(item) {
+        return item.price > 14 && item.price < 18
+    }
+    return rangeValidation(item)
+})
+console.log("Question 2")
+console.log(flippingPricedItemRange) // I feel sooooo close, but get undefined if I add .title to the array...  Submitting because today has been long and full of airplanes.
 // Question 3
 // temp.forEach(function (item, index, array) {
 //   console.log(item, index);
@@ -105,11 +138,17 @@ console.log("Items that cost between $14.00 USD and $18.00 USD: ", itemsInPriceR
 // britishPound = britishPoundSearch(items)
 // console.log(britishPound.title)
 
-items.forEach(function(item) { //could filter
-    if (item.currency_code === 'GBP') {
-        console.log(item.title + ' costs ' + accounting.formatMoney(item.price))
-    }
+// items.forEach(function(item) { //could filter
+//     if (item.currency_code === 'GBP') {
+//         console.log(item.title + ' costs ' + accounting.formatMoney(item.price))
+//     }
+// })
+var itemForPounds = items.filter(function(item) { 
+    return item.currency_code.includes('GBP')
 })
+console.log("Question 3")
+console.log(itemForPounds[0].title, 'costs', accounting.formatMoney((itemForPounds[0].price), { symbol: "GBP", format: "%v %s" })) // hacks, figure how to use non zero array reference
+
 
 // Question 4
 // Show me how to find which items are made of wood. Please console.log the ones you find.
@@ -129,6 +168,7 @@ function woodSearch(item) {
     return item.materials.includes('wood')
 }
 var woodItems = items.filter(woodSearch)
+console.log("Question 4")
 console.log(woodItems)
 // Question 5
 // Show me how to find which items are made of eight or more materials. Please console.log the ones you find.
@@ -160,32 +200,56 @@ console.log(woodItems)
 // personalized harry potter glass
 
 // var materialList = []
-items.forEach(function(item) { // refactor this to list the items unless Collin says it's Cool
-    if (item.materials.length >= 8) {//filter rewrite
-        // return item.materials
-        console.log(item.title + ' has ' + item.materials.length + ' materials:')
-        console.log(item.materials)
-        // materialList.push(item.materials)
-    }
+// items.forEach(function(item) { // refactor this to list the items unless Collin says it's Cool
+// if (item.materials.length >= 8) {//filter rewrite
+//     // return item.materials
+//     console.log(item.title + ' has ' + item.materials.length + ' materials:')
+//     console.log(item.materials)
+//     // materialList.push(item.materials)
+// }
+// })
+var moreThan8 = items.filter(function(item) { // this looks better, filters for items with enough materials
+    return item.materials.length >= 8
 })
-
-// console.log(materialList)
+moreThan8.forEach(function(item){ // forEach to draw them to console in sequence
+    console.log("Question 6")
+    console.log(item.title, 'has', item.materials.length, 'materials:')
+    console.log(item.materials)
+})
+// console.log(moreThan8.title, 'has ' + moreThan8.materials.length + ' materials:')
+// console.log(moreThan8)
 
 //Question 6
 // Show me how to calculate how many items were made by their sellers
 // 18 were made by their sellers
 
-var selfBuiltCount = 0 // reduce
-items.forEach(function(item){
+// var selfBuiltCount = 0 // reduce
+// items.forEach(function(item){
+//
+//     if (item.who_made === 'i_did') {
+//         selfBuiltCount++
+//     }
+// })
+// console.log(selfBuiltCount + ' were made by their sellers')
 
-    if (item.who_made === 'i_did') {
-            selfBuiltCount++
-    }
-})
-console.log(selfBuiltCount + ' were made by their sellers')
+//
+// var iMadeThis = items.reduce(function(previous, current){
+//     if (current.who_made === 'i_did') {
+//         return previous + 1
+//     }
+//     else {
+//         return previous
+//     }
+// }, 0)
+//
+// var iMadeThis = items.reduce(function(previous, current) {
+//     return (current.who_made === 'i_did') ? previous + 1 : previous //ternary!  What?!
+// }, 0)
+//
+// console.log(iMadeThis)
 
 
-var iMadeThis = items.reduce(function(previous, current){
+var iMade = items.reduce(function(previous, current){// tried it with reduce hax and it worked.  noice!
     if (current.who_made === 'i_did') {
         return previous + 1
     }
@@ -193,9 +257,5 @@ var iMadeThis = items.reduce(function(previous, current){
         return previous
     }
 }, 0)
-
-var iMadeThis = items.reduce(function(previous, current) {
-    return (current.who_made === 'i_did') ? previous + 1 : previous //ternary!  What?!
-}, 0)
-
-console.log(iMadeThis)
+console.log("Question 7")
+console.log(iMade + ' were made by their sellers.')
